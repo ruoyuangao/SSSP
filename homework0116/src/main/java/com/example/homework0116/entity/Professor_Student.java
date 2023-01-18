@@ -15,7 +15,7 @@ public class Professor_Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private int id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "s_id")
@@ -23,6 +23,16 @@ public class Professor_Student {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "p_id")
-    private Professor professor;
+    private Professor pro;
+
+    @Override
+    public String toString() {
+        return "Professor_Student{" +
+                "id='" + id + '\'' +
+                "stu='" + stu.getName() + '\'' +
+                "pro='" + pro.getName() + '\'' +
+                '}';
+    }
+
 
 }

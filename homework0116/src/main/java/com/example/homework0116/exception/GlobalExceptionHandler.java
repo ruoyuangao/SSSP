@@ -12,9 +12,15 @@ public class GlobalExceptionHandler {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<?> handleException() {
-        // logger
-        return new ResponseEntity<>("xxx not found", HttpStatus.NOT_FOUND);
+    public ResponseEntity<?> handleNotFoundException() {
+        logger.error("Null pointer, resource not found");
+        return new ResponseEntity<>("Resource not found", HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<?> handleOtherException() {
+        logger.error("Exception occurs");
+        return new ResponseEntity<>("Exception", HttpStatus.BAD_REQUEST);
     }
 }
 

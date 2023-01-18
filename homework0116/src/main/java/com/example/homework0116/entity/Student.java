@@ -1,5 +1,6 @@
 package com.example.homework0116.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,7 +18,7 @@ import java.util.Objects;
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private int id;
 
     @Column(name = "name")
     private String name;
@@ -28,18 +29,18 @@ public class Student {
     @Column(name="age")
     private int age;
 
-    @OneToMany(mappedBy = "stu", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = false)
+    @OneToMany(mappedBy = "stu", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, orphanRemoval = false)
+    @JsonIgnore
     private List<Professor_Student> professor_studentList;
 
-    public List<Professor_Student> getProfessor_studentList() {
-        return professor_studentList;
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", gender='" + gender + '\'' +
+                ", age='" + age + '\'' +
+                '}';
     }
 
-    public void setProfessor_studentList(List<Professor_Student> ps) {
-        this.professor_studentList = ps;
-    }
-
-    public void addProfessor_studentList(Professor_Student ps) {
-        this.professor_studentList.add(ps);
-    }
 }
